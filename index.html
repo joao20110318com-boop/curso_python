@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Santos Católicos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-main: #0f070d;
+  --bg-gradient: linear-gradient(180deg, #230814 0%, #120815 40%, #080d1e 100%);
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-hover: rgba(255, 255, 255, 0.1);
+  --border-gold: rgba(212, 175, 55, 0.35);
+  --border-gold-hover: rgba(236, 208, 138, 0.85);
+  --gold-primary: #d4af37;
+  --gold-light: #ecd08a;
+  --gold-dark: #8c6d23;
+  --text-main: #f3f0e6;
+  --text-muted: #d0c8d5;
+  --font-title: 'Cinzel', serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --radius-card: 16px;
+  --radius-btn: 999px;
+  --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  color: var(--text-main);
+  font: 400 1rem/1.7 var(--font-body);
+  background-color: var(--bg-main);
+  background-image: 
+    linear-gradient(180deg, rgba(15, 7, 13, 0.82) 0%, rgba(18, 8, 21, 0.88) 50%, rgba(8, 13, 30, 0.95) 100%),
+    url('https://images.unsplash.com/photo-1548625149-fc4a29cf7092?q=80&w=1920&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 4px;
+}
+
+/* Header */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem clamp(1.2rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--border-gold);
+  background: rgba(15, 7, 13, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.marca {
+  font: 700 1.3rem var(--font-title);
+  color: var(--gold-light);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+header nav { display: flex; gap: 2rem; }
+header nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+header nav a:hover { color: var(--gold-light); }
+
+/* Hero Section */
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.2rem, 5vw, 4rem);
+}
+
+.hero h1 {
+  font: 700 clamp(2.2rem, 5vw, 3.8rem)/1.2 var(--font-title);
+  background: linear-gradient(135deg, #ffffff 0%, var(--gold-light) 60%, var(--gold-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.2rem;
+}
+
+.hero p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  max-width: 36rem;
+}
+
+.lema {
+  margin-top: 1.2rem;
+  font-style: italic;
+  color: var(--gold-primary);
+  display: block;
+}
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  padding: 0.85rem 2rem;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
+  color: #1a0812;
+  font: 700 0.95rem var(--font-title);
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  border-radius: var(--radius-btn);
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+  transition: var(--transition);
+}
+
+.botao:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px rgba(212, 175, 55, 0.4);
+  background: linear-gradient(135deg, #fff, var(--gold-light));
+}
+
+/* Vitral / Rosácea */
+.rosa {
+  justify-self: center;
+  position: relative;
+  width: min(75vw, 340px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid var(--gold-primary);
+  background: repeating-conic-gradient(#8b1a2b 0 15deg, #182e6b 15deg 30deg, #c4952b 30deg 45deg, #14523b 45deg 60deg);
+  box-shadow: 0 0 50px rgba(212, 175, 55, 0.3), inset 0 0 30px rgba(0,0,0,0.7);
+  animation: luz 2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.rosa::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: 
+    repeating-conic-gradient(rgba(15, 7, 13, 0.85) 0 1.5deg, transparent 1.5deg 15deg),
+    radial-gradient(circle, transparent 0 30%, rgba(15, 7, 13, 0.85) 30% 32%, transparent 32% 63%, rgba(15, 7, 13, 0.85) 63% 65%, transparent 65%);
+}
+
+.rosa span {
+  position: absolute;
+  inset: 32%;
+  border-radius: 50%;
+  background: #230814;
+  border: 4px solid var(--gold-primary);
+  display: grid;
+  place-items: center;
+  font-size: clamp(2rem, 6vw, 3rem);
+  color: var(--gold-light);
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+@keyframes luz {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Seções */
+section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.2rem, 5vw, 4rem);
+}
+
+h2 {
+  font: 700 clamp(1.8rem, 4vw, 2.4rem) var(--font-title);
+  color: var(--gold-light);
+  margin-bottom: 0.6rem;
+}
+
+.intro { color: var(--text-muted); max-width: 42rem; margin-bottom: 2rem; }
+
+/* Filtros */
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 2.5rem;
+}
+
+.filtros button {
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--surface);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border-gold);
+  padding: 0.5rem 1.2rem;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filtros button:hover {
+  background: var(--surface-hover);
+  color: var(--text-main);
+  border-color: var(--gold-primary);
+}
+
+.filtros button[aria-pressed=true] {
+  background: var(--gold-primary);
+  color: #1a0812;
+  border-color: var(--gold-primary);
+  font-weight: 600;
+  box-shadow: 0 2px 12px rgba(212, 175, 55, 0.3);
+}
+
+/* Grid de Santos */
+.santos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.santo {
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  background: var(--surface);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-card);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: var(--transition);
+}
+
+.santo:hover {
+  border-color: var(--border-gold-hover);
+  transform: translateY(-4px);
+  background: var(--surface-hover);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+.arco {
+  width: 50px;
+  height: 64px;
+  border-radius: 25px 25px 6px 6px;
+  border: 2px solid var(--gold-primary);
+  display: grid;
+  place-items: center;
+  font: 700 1.3rem var(--font-title);
+  color: var(--gold-light);
+  background: linear-gradient(180deg, #1f3a8a 0%, #0d1633 100%);
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.2);
+}
+
+.santo h3 {
+  font: 700 1.2rem/1.3 var(--font-title);
+  color: var(--text-main);
+}
+
+.santo small {
+  color: var(--gold-primary);
+  font-size: 0.88rem;
+  font-weight: 500;
+  margin-top: auto;
+}
+
+/* Modal / Dialog */
+dialog {
+  margin: auto;
+  width: min(90vw, 600px);
+  max-height: 85vh;
+  overflow-y: auto;
+  background: #180913;
+  color: var(--text-main);
+  border: 1px solid var(--gold-primary);
+  border-radius: var(--radius-card);
+  padding: 2.2rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+}
+
+dialog::backdrop {
+  background: rgba(5, 2, 6, 0.85);
+  backdrop-filter: blur(6px);
+}
+
+dialog h3 {
+  font: 700 1.8rem/1.2 var(--font-title);
+  color: var(--gold-light);
+  margin: 1.2rem 0 0.4rem;
+}
+
+dialog p { margin-bottom: 1rem; }
+
+.vida {
+  color: var(--gold-primary);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+#dh { color: var(--text-muted); }
+
+dialog dl {
+  border-top: 1px solid var(--border-gold);
+  padding-top: 1.2rem;
+  margin-top: 1.2rem;
+}
+
+dt {
+  font-family: var(--font-title);
+  color: var(--gold-light);
+  font-weight: 700;
+  margin-top: 0.8rem;
+}
+
+dd { color: var(--text-muted); font-size: 0.95rem; }
+
+.fechar {
+  float: right;
+  font: inherit;
+  font-size: 0.85rem;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-btn);
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.fechar:hover {
+  border-color: var(--gold-light);
+  color: var(--gold-light);
+}
+
+/* Sobre */
+.sobre p {
+  max-width: 48rem;
+  color: var(--text-muted);
+  margin-bottom: 1.2rem;
+  font-size: 1.05rem;
+}
+
+.sobre b { color: var(--gold-light); font-weight: 600; }
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-gold);
+  font-size: 0.9rem;
+  background: rgba(10, 4, 9, 0.75);
+}
+
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+  .hero p { margin: 0 auto; }
+  .rosa { order: -1; width: min(60vw, 240px); }
+  header { flex-direction: column; gap: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rosa { animation: none; }
+  .santo, .botao, .filtros button { transition: none; }
+}
+</style>
+</head>
+<body>
+<header>
+  <a class="marca" href="#inicio">✝ Santos Católicos</a>
+  <nav aria-label="Principal">
+    <a href="#santos">Os santos</a>
+    <a href="#sobre">O que é um santo?</a>
+  </nav>
+</header>
+<main id="inicio">
+  <div class="hero">
+    <div>
+      <h1>Homens e mulheres que viveram o Evangelho até o fim</h1>
+      <p>Conheça a história, a festa e o padroado de santos amados pela Igreja Católica, dos apóstolos a Santa Dulce dos Pobres.</p>
+      <span class="lema">Sancti Dei, orate pro nobis. <small style="color:var(--text-muted); font-style:normal;">(Santos de Deus, rogai por nós.)</small></span>
+      <a class="botao" href="#santos">Conhecer os santos</a>
+    </div>
+    <div class="rosa" aria-hidden="true"><span>✝</span></div>
+  </div>
+  <section id="santos">
+    <h2>Conheça os santos</h2>
+    <p class="intro">A Igreja reconhece milhares de santos. Aqui estão alguns dos mais queridos. Toque em um para ler a história dele.</p>
+    <div class="filtros" id="filtros" role="group" aria-label="Filtrar santos"></div>
+    <div class="santos" id="lista"></div>
+  </section>
+  <section id="sobre" class="sobre">
+    <h2>O que é um santo?</h2>
+    <p>Na tradição católica, <b>santo</b> é quem viveu em profunda união com Deus e hoje, acredita-se, está na presença dele. Muitos tiveram uma juventude difícil e se converteram ao longo da vida.</p>
+    <p>A Igreja reconhece a santidade pela <b>canonização</b>: a pessoa é declarada serva de Deus, depois venerável, beata e, por fim, santa. Os fiéis pedem a <b>intercessão</b> dos santos, isto é, que rezem por eles junto a Deus. A adoração é devida somente a Deus.</p>
+    <p>Um <b>doutor da Igreja</b> é um santo reconhecido pela importância dos seus ensinamentos; um <b>mártir</b> deu a vida pela fé.</p>
+  </section>
+</main>
+<footer>Site feito para estudo e devoção. Datas conforme o calendário litúrgico geral; confira em fontes oficiais, como o Vaticano e a CNBB.</footer>
+<dialog id="det" aria-labelledby="dn">
+  <button class="fechar" id="fechar" type="button">Fechar</button>
+  <div class="arco" id="da" aria-hidden="true"></div>
+  <h3 id="dn"></h3>
+  <p class="vida" id="dv"></p>
+  <p id="dh"></p>
+  <dl>
+    <dt>Festa litúrgica</dt>
+    <dd id="df"></dd>
+    <dt>Padroeiro(a) ou invocado(a) por</dt>
+    <dd id="dp"></dd>
+  </dl>
+</dialog>
+<script>
+const D=[
+"Nossa Senhora, Maria de Nazaré|Século I, Nazaré e Jerusalém|1º de janeiro (Mãe de Deus); 12 de outubro (Aparecida)|Mãe da Igreja; Nossa Senhora Aparecida é a padroeira do Brasil|Jovem de Nazaré, disse “sim” ao anjo Gabriel e tornou-se mãe de Jesus. Acompanhou o Filho até a cruz e esteve com os apóstolos em Pentecostes. É a mais venerada de todos os santos.|biblico,brasil",
+"São José|Século I, Nazaré|19 de março; 1º de maio (São José Operário)|Igreja universal, famílias e trabalhadores|Carpinteiro de Nazaré, acolheu Maria e protegeu o Menino Jesus, inclusive na fuga para o Egito. O Evangelho o mostra como homem justo, que obedece a Deus em silêncio.|biblico",
+"São João Batista|Século I, Judeia|24 de junho (nascimento); 29 de agosto (martírio)|Precursor de Cristo|Filho de Isabel e Zacarias, pregou a conversão no deserto e batizou Jesus no rio Jordão. Por denunciar o rei Herodes Antipas, foi preso e decapitado.|biblico,martir",
+"São Pedro|Século I, Betsaida e Roma|29 de junho|Papas e pescadores|Pescador da Galileia, foi chamado por Jesus e recebeu o primeiro lugar entre os apóstolos. Liderou a Igreja nascente e foi martirizado em Roma, onde seu túmulo é venerado sob a Basílica de São Pedro, no Vaticano.|biblico,martir",
+"São Paulo|c. 5–c. 64/67, Tarso e Roma|29 de junho|Missionários e escritores cristãos|Perseguiu os primeiros cristãos até se converter no caminho de Damasco. Fez longas viagens missionárias, fundou comunidades e escreveu cartas que formam grande parte do Novo Testamento. Foi martirizado em Roma.|biblico,martir",
+"São Sebastião|m. c. 288, Roma|20 de janeiro|Padroeiro da cidade do Rio de Janeiro; atletas|Soldado romano que ajudava cristãos presos. Condenado à morte, foi atingido por flechas e sobreviveu, mas acabou sendo morto a pauladas. É muito venerado no Brasil.|martir,brasil",
+"São Jorge|m. c. 303, Capadócia e Lida|23 de abril|Soldados e cavaleiros|Oficial do exército romano, recusou renegar a fé cristã na perseguição do imperador Diocleciano e foi martirizado. A lenda do cavaleiro que vence o dragão simboliza a vitória do bem sobre o mal.|martir",
+"Santa Luzia|m. 304, Siracusa (Sicília)|13 de dezembro|Pessoas com problemas de visão|Jovem cristã de Siracusa, consagrou a vida a Deus e distribuiu seus bens aos pobres. Foi martirizada na perseguição de Diocleciano. Seu nome lembra “luz”.|martir",
+"Santo Agostinho|354–430, Tagaste e Hipona (norte da África)|28 de agosto|Teólogos e estudiosos|Depois de uma juventude agitada e de buscar a verdade em várias filosofias, converteu-se. Tornou-se bispo de Hipona e escreveu as Confissões e A Cidade de Deus.|doutor",
+"São Bento|c. 480–c. 547, Núrsia e Monte Cassino|11 de julho|Padroeiro da Europa|Deixou Roma para viver como eremita e depois fundou mosteiros. Sua Regra, com o lema “ora et labora” (reza e trabalha), organizou a vida monástica por séculos.|fundador",
+"São Domingos de Gusmão|c. 1170–1221, Caleruega (Espanha) e Bolonha|8 de agosto|Astrônomos e pregadores|Padre espanhol que fundou a Ordem dos Pregadores, os dominicanos, para ensinar a fé com estudo e pregação. Difundiu a devoção ao Rosário.|fundador",
+"São Francisco de Assis|1181/82–1226, Assis (Itália)|4 de outubro|Animais e ecologia|Filho de um rico comerciante, renunciou aos bens para viver o Evangelho com simplicidade. Fundou a Ordem dos Frades Menores e escreveu o Cântico das Criaturas.|fundador",
+"Santa Clara de Assis|1193/94–1253, Assis (Itália)|11 de agosto|Televisão (Pio XII, 1958)|Inspirada por Francisco, deixou a casa da família e fundou as Damas Pobres, as clarissas. Viveu em clausura, em pobreza e oração.|fundador",
+"Santo Antônio de Pádua|c. 1195–1231, Lisboa e Pádua|13 de junho|Pobres; na devoção popular, objetos perdidos e casamentos|Nascido em Lisboa, tornou-se franciscano e ficou famoso pela pregação e pelo conhecimento da Bíblia. Foi proclamado doutor da Igreja em 1946.|doutor",
+"São Tomás de Aquino|c. 1225–1274, Roccasecca (Itália)|28 de janeiro|Estudantes e escolas católicas|Frade dominicano que uniu fé e razão na Suma Teológica, sua obra mais importante. É chamado de Doutor Angélico.|doutor",
+"Santa Joana d'Arc|1412–1431, Domrémy e Rouen (França)|30 de maio|França e soldados|Camponesa que dizia ouvir vozes de santos e liderou tropas francesas na Guerra dos Cem Anos. Foi condenada e queimada aos 19 anos. Foi canonizada em 1920.|martir",
+"Santa Rita de Cássia|c. 1381–1457, Roccaporena e Cássia (Itália)|22 de maio|Causas difíceis e impossíveis|Esposa e mãe, enfrentou perdas dolorosas e depois entrou para um mosteiro agostiniano. É lembrada como mulher de paz e perdão.|fundador",
+"Santa Teresa de Ávila|1515–1582, Ávila (Espanha)|15 de outubro|Escritores e orantes|Carmelita que reformou sua ordem e fundou vários conventos. Escreveu O Castelo Interior e foi uma das primeiras mulheres declaradas doutoras da Igreja, em 1970.|doutor,fundador",
+"São João da Cruz|1542–1591, Fontiveros e Úbeda (Espanha)|14 de dezembro|Poetas e místicos|Frade carmelita que ajudou Teresa de Ávila na reforma da ordem. Foi preso por isso e escreveu poemas místicos famosos, como Noite Escura. É doutor da Igreja.|doutor",
+"Santo Inácio de Loyola|1491–1556, Loyola (Espanha) e Roma|31 de julho|Retiros espirituais e jesuítas|Soldado ferido em batalha, converteu-se durante a recuperação. Escreveu os Exercícios Espirituais e fundou a Companhia de Jesus, os jesuítas.|fundador",
+"São Francisco Xavier|1506–1552, Navarra (Espanha) e China|3 de dezembro|Missões (copadroeiro)|Companheiro de Inácio de Loyola, foi missionário na Índia, no Sudeste Asiático e no Japão, batizando milhares de pessoas. Morreu perto da China.|fundador",
+"São José de Anchieta|1534–1597, Tenerife (Espanha) e Brasil|9 de junho|Professores e catequistas no Brasil|Jesuíta que veio ao Brasil em 1553 e participou da fundação de São Paulo, em 1554. Aprendeu o tupi, escreveu uma gramática da língua e poemas. Foi canonizado em 2014.|brasil,fundador",
+"São Vicente de Paulo|1581–1660, França|27 de setembro|Obras de caridade|Padre francês que se dedicou aos pobres, aos doentes e aos presos. Fundou os lazaristas e, com Luísa de Marillac, as Filhas da Caridade. Inspirou a Sociedade de São Vicente de Paulo.|fundador",
+"São João Bosco|1815–1888, Turim (Itália)|31 de janeiro|Jovens e estudantes|Padre italiano que acolheu jovens pobres e abandonados com oratórios, escolas e oficinas. Fundou os salesianos, presentes em muitos colégios no Brasil.|fundador",
+"Santa Teresinha do Menino Jesus|1873–1897, Lisieux (França)|1º de outubro|Missões (copadroeira)|Entrou no Carmelo muito jovem e morreu aos 24 anos. Em História de uma Alma ensina o “pequeno caminho”: santidade nas coisas simples feitas com amor. Doutora da Igreja desde 1997.|doutor,moderno",
+"São Padre Pio de Pietrelcina|1887–1968, Pietrelcina e San Giovanni Rotondo (Itália)|23 de setembro|Voluntários da proteção civil|Frade capuchinho que passava horas no confessionário e dizia carregar as chagas de Cristo. Fundou um hospital para os pobres. Foi canonizado em 2002.|moderno",
+"São Maximiliano Kolbe|1894–1941, Polônia e Auschwitz|14 de agosto|Famílias e prisioneiros|Frade franciscano polonês preso em Auschwitz. Ofereceu-se para morrer no lugar de outro prisioneiro, pai de família. Foi canonizado em 1982.|martir,moderno",
+"Santa Faustina Kowalska|1905–1938, Polônia|5 de outubro|Devotos da Divina Misericórdia|Freira polonesa que registrou em um diário suas experiências espirituais, de onde nasceu a devoção à Divina Misericórdia. Foi canonizada em 2000.|moderno",
+"Santa Teresa de Calcutá|1910–1997, Escópia e Calcutá (Índia)|5 de setembro|Serviço aos mais pobres|Fundou em 1950 as Missionárias da Caridade para cuidar dos mais pobres. Recebeu o Nobel da Paz em 1979 e foi canonizada em 2016.|fundador,moderno",
+"São João Paulo II|1920–2005, Wadowice (Polônia) e Vaticano|22 de outubro|Jornadas Mundiais da Juventude e famílias|Karol Wojtyła foi papa de 1978 a 2005, um dos pontificados mais longos da história. Viajou pelo mundo, criou as Jornadas Mundiais da Juventude e foi canonizado em 2014.|moderno",
+"Santa Dulce dos Pobres|1914–1992, Salvador (Brasil)|13 de agosto|Pobres e doentes|Irmã Dulce dedicou a vida aos pobres e doentes de Salvador e fundou as Obras Sociais Irmã Dulce. É a primeira santa nascida no Brasil, canonizada em 2019.|brasil,fundador,moderno"
+].map(l=>{const p=l.split("|");return{n:p[0],v:p[1],f:p[2],pd:p[3],h:p[4],g:p[5].split(",")}});
+
+const G=[["todos","Todos"],["biblico","Bíblicos"],["martir","Mártires"],["doutor","Doutores da Igreja"],["fundador","Fundadores"],["moderno","Séculos XIX–XXI"],["brasil","Brasil"]];
+const $=id=>document.getElementById(id),fl=$("filtros"),ls=$("lista"),dg=$("det");let at="todos";
+const ini=n=>n.replace(/^(Nossa Senhora|Santa|Santo|São)\s+(de\s+|do\s+|da\s+)?/,"").charAt(0);
+
+function filtros(){
+  fl.innerHTML="";
+  G.forEach(([id,nome])=>{
+    const b=document.createElement("button");
+    b.type="button";
+    b.textContent=nome;
+    b.setAttribute("aria-pressed",id===at);
+    b.onclick=()=>{at=id;filtros();lista()};
+    fl.appendChild(b);
+  });
+}
+
+function lista(){
+  ls.innerHTML="";
+  D.filter(s=>at==="todos"||s.g.includes(at)).forEach(s=>{
+    const c=document.createElement("button");
+    c.type="button";
+    c.className="santo";
+    c.innerHTML='<div class="arco" aria-hidden="true">'+ini(s.n)+'</div><div><h3>'+s.n+'</h3></div><small>Festa: '+s.f+'</small>';
+    c.onclick=()=>{
+      $("da").textContent=ini(s.n);
+      $("dn").textContent=s.n;
+      $("dv").textContent=s.v;
+      $("dh").textContent=s.h;
+      $("df").textContent=s.f;
+      $("dp").textContent=s.pd;
+      dg.showModal();
+    };
+    ls.appendChild(c);
+  });
+}
+
+$("fechar").onclick=()=>dg.close();
+dg.onclick=e=>{if(e.target===dg)dg.close()};
+filtros();
+lista();
+</script>
+</body>
+</html>
